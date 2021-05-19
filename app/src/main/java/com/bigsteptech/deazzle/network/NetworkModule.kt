@@ -43,20 +43,9 @@ object NetworkModule {
             chain.proceed(request)
         }
 
-        val interceptor = Interceptor { chain ->
-            val requestWithSessionId = chain.request().newBuilder()
-            if (chain.request().header("Authorization") == null) {
-                requestWithSessionId.addHeader(
-                    "Authorization", "Bearer " + "AAAAAAAAAAAAAAAAAAAAAPZ1PAEAAAAAcsePjLWtw" +
-                            "xiMU1Nz7inP4qLwRxQ%3DKzLWADWMoFNvAO2silPGH5xUVHYkJjHYamp7zgdjGlaMoE780M"
-                )
-            }
-            chain.proceed(requestWithSessionId.build())
-        }
-
         httpClient.addInterceptor(skipLoggingInterceptor)
 
-        val networkConnectionIntercepter = Interceptor { chain ->
+        val networkConnectionInterceptor = Interceptor { chain ->
 
             val cm =
                 appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -70,8 +59,7 @@ object NetworkModule {
             chain.proceed(chain.request())
         }
 
-        httpClient.addInterceptor(networkConnectionIntercepter)
-        httpClient.addInterceptor(interceptor)
+        httpClient.addInterceptor(networkConnectionInterceptor)
 
         return httpClient.build()
     }
