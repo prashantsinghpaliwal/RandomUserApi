@@ -42,7 +42,7 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                app:setImageUrl="@{model.picture}"
+                app:setRoundedImageUrl="@{model.picture}"
                 tools:src="@drawable/ic_stub_photo" />
 
             <ImageView
@@ -71,8 +71,8 @@
                     style="@style/Body2.Semibold.White"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/transparent_white_bg"
                     android:gravity="center"
                     android:paddingStart="@dimen/dimen_8dp"
@@ -95,10 +95,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:ellipsize="end"
+                    android:layoutDirection="ltr"
                     android:maxWidth="150dp"
                     android:text="@{model.name}"
                     android:textColor="@color/white"
-                    app:chainUseRtl="false"
                     app:layout_constraintBottom_toTopOf="@id/user_location"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="Samantha, 18" />
@@ -111,10 +111,10 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="20dp"
                     android:ellipsize="end"
+                    android:layoutDirection="ltr"
                     android:maxWidth="150dp"
                     android:text="@{model.city + `, ` + model.country.toUpperCase()}"
                     android:textColor="@color/white"
-                    app:chainUseRtl="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="Designer, Adorable Agency" />

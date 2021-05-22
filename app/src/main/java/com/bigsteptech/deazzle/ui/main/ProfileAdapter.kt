@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bigsteptech.deazzle.R
 import com.bigsteptech.deazzle.data.local.Profile
 import com.bigsteptech.deazzle.databinding.ItemProfileBinding
-import com.jakewharton.rxbinding4.view.visibility
 
 
 class ProfileAdapter(private val clickListener: ItemClickListener) :
@@ -34,28 +33,34 @@ class ProfileAdapter(private val clickListener: ItemClickListener) :
             model = profileList[position]
             itemClick = clickListener
 
-            when(profileList[position].likeStatus){
+            when (profileList[position].likeStatus) {
 
                 -1 -> {
-                   likeStatus.visibility(View.GONE)
+                    likeStatus.visibility = View.GONE
                 }
 
                 0 -> {
-                    likeStatus.visibility(View.VISIBLE)
-                    likeStatus.setTextColor(ContextCompat.getColor(likeStatus.context, R.color.error))
+                    likeStatus.visibility = View.VISIBLE
+                    likeStatus.setTextColor(
+                        ContextCompat.getColor(
+                            likeStatus.context,
+                            R.color.error
+                        )
+                    )
                     likeStatus.text = "Rejected"
                 }
 
-                1 -> {
-                    likeStatus.visibility(View.VISIBLE)
-                    likeStatus.setTextColor(ContextCompat.getColor(likeStatus.context, R.color.success))
+                else -> {
+                    likeStatus.visibility = View.VISIBLE
+                    likeStatus.setTextColor(
+                        ContextCompat.getColor(
+                            likeStatus.context,
+                            R.color.success
+                        )
+                    )
                     likeStatus.text = "Accepted"
                 }
             }
-            if (profileList[position].likeStatus == 0)
-                likeStatus.visibility(View.GONE)
-
-
         }
 
         holder.binding.executePendingBindings()
