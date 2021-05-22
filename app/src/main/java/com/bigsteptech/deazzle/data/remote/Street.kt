@@ -1,11 +1,11 @@
-package com.bigsteptech.deazzle.data
+package com.bigsteptech.deazzle.data.remote
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Id(
+data class Street(
     @SerialName("name")
     val name: String? = "",
-    @SerialName("value")
-    val value: String? = ""
+    @SerialName("number")
+    val number: Int? = 0
 )

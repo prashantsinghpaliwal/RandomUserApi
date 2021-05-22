@@ -1,4 +1,4 @@
-package com.bigsteptech.deazzle.data
+package com.bigsteptech.deazzle.data.remote
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

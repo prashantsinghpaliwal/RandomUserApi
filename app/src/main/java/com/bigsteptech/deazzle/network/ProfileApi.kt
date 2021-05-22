@@ -1,7 +1,7 @@
 package com.bigsteptech.deazzle.network
 
 
-import com.bigsteptech.deazzle.data.MainResponse
+import com.bigsteptech.deazzle.data.remote.MainResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

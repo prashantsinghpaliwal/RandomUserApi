@@ -17,6 +17,7 @@ import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.net.UnknownHostException
+import javax.inject.Singleton
 
 
 @Module
@@ -64,6 +65,7 @@ object NetworkModule {
         return httpClient.build()
     }
 
+    @Singleton
     @Provides
     fun provideRetrofitBuilder(): Retrofit.Builder {
         val contentType = "application/json".toMediaType()

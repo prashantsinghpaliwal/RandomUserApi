@@ -1,23 +1,43 @@
 package com.bigsteptech.deazzle.ui.main
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bigsteptech.deazzle.network.ProfileService
+import com.bigsteptech.deazzle.data.local.Profile
+import com.bigsteptech.deazzle.data.repository.ProfileRepository
 import kotlinx.coroutines.launch
 
-class MainViewModel @ViewModelInject constructor(private val profileService: ProfileService) :
+class MainViewModel @ViewModelInject constructor(private val repository: ProfileRepository) :
     ViewModel() {
 
+    private val _data = MutableLiveData<Any>()
+    val data: LiveData<Any>
+        get() = _data
 
-    fun fetchProfiles() {
+    val someData = MutableLiveData<List<Profile>>()
+
+    init {
+        fetchProfiles()
+    }
+
+    private fun fetchProfiles() {
 
         viewModelScope.launch {
-           profileService.getProfiles(1).let {
-               Log.v("ResponseLogs","response ${it.body()?.results}")
-           }
+            repository.getProfiles(10)
         }
+    }
 
+    fun updateStatus(profile: Profile, status: Int) = viewModelScope.launch {
+        repository.updateStatus(profile, status)
+    }
+
+    fun getCachedProfiles() {
+        viewModelScope.launch {
+            repository.getCachedProfiles().value?.let {
+                someData.postValue(it)
+            }
+        }
     }
 }

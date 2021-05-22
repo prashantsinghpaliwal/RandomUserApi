@@ -1,20 +1,22 @@
 package com.bigsteptech.deazzle.network
 
-import com.bigsteptech.deazzle.data.MainResponse
-import retrofit2.Response
+import com.bigsteptech.deazzle.common.Resource
+import com.bigsteptech.deazzle.data.remote.MainResponse
 import javax.inject.Inject
 
 interface ProfileService {
 
-   suspend fun getProfiles(page : Int): Response<MainResponse>
+    suspend fun getProfiles(page: Int): Resource<MainResponse>
 
 
     class Impl @Inject constructor(
         private val profileApi: ProfileApi
-    ) : ProfileService {
+    ) : ProfileService, BaseDataSource() {
 
-        override suspend fun getProfiles(page: Int): Response<MainResponse> =
-            profileApi.getProfiles()
+        override suspend fun getProfiles(page: Int) =
+            getResult {
+                profileApi.getProfiles()
+            }
 
 
     }
