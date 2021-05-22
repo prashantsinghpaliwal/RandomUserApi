@@ -68,12 +68,12 @@ class MainActivity : AppCompatActivity(), ProfileAdapter.ItemClickListener {
                     profileAdapter.set(data as MutableList<Profile>)
             }
 
-
         })
 
-        viewModel.getCachedProfiles()
-        viewModel.someData.observe(this, {
-            profileAdapter.set(it)
+        viewModel.getCachedProfiles().observe(this, {
+            it?.let {
+                profileAdapter.set(it)
+            }
         })
     }
 
@@ -82,6 +82,6 @@ class MainActivity : AppCompatActivity(), ProfileAdapter.ItemClickListener {
     }
 
     override fun onDeclineClicked(profile: Profile) {
-        viewModel.updateStatus(profile,-1)
+        viewModel.updateStatus(profile,0)
     }
 }

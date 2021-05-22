@@ -9,6 +9,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -73,6 +74,7 @@ object NetworkModule {
             .addConverterFactory(Json {
                 isLenient = true
             }.asConverterFactory(contentType))
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
     }
 
     @Provides
