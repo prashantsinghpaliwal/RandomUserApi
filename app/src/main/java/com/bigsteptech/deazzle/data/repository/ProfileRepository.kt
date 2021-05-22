@@ -1,6 +1,7 @@
 package com.bigsteptech.deazzle.data.repository
 
 import com.bigsteptech.deazzle.common.Status
+import com.bigsteptech.deazzle.data.local.LikeStatus
 import com.bigsteptech.deazzle.data.local.Profile
 import com.bigsteptech.deazzle.data.local.ProfileDao
 import com.bigsteptech.deazzle.network.ProfileService
@@ -28,7 +29,7 @@ class ProfileRepository @Inject constructor(
                         it.location?.city, it.location?.country, "${it.name?.title} " +
                                 "${it.name?.first} " +
                                 "${it.name?.last}", it.phone, it.picture?.large,
-                        -1
+                        LikeStatus.UNDEFINED
                     )
                 }?.toList()!!)
             }
@@ -43,7 +44,7 @@ class ProfileRepository @Inject constructor(
     fun getCachedProfiles(): Flow<List<Profile>> =
         localDataSource.getAll()
 
-    suspend fun updateStatus(profile: Profile, status: Int) =
+    suspend fun updateStatus(profile: Profile, status: LikeStatus) =
         localDataSource.updateItem(profile.id, status)
 
 }

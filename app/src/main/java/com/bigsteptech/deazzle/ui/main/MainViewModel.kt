@@ -3,6 +3,7 @@ package com.bigsteptech.deazzle.ui.main
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.bigsteptech.deazzle.common.Status
+import com.bigsteptech.deazzle.data.local.LikeStatus
 import com.bigsteptech.deazzle.data.local.Profile
 import com.bigsteptech.deazzle.data.repository.ProfileRepository
 import kotlinx.coroutines.flow.collect
@@ -27,7 +28,7 @@ class MainViewModel @ViewModelInject constructor(private val repository: Profile
         }
     }
 
-    fun updateStatus(profile: Profile, status: Int) = viewModelScope.launch {
+    fun updateStatus(profile: Profile, status: LikeStatus) = viewModelScope.launch {
         repository.updateStatus(profile, status)
     }
 

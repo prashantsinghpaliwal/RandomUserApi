@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.bigsteptech.deazzle.R
+import com.bigsteptech.deazzle.data.local.LikeStatus
 import com.bigsteptech.deazzle.data.local.Profile
 import com.bigsteptech.deazzle.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,10 +53,10 @@ class MainActivity : AppCompatActivity(), ProfileAdapter.ItemClickListener {
     }
 
     override fun onAcceptClicked(profile: Profile) {
-        viewModel.updateStatus(profile, 1)
+        viewModel.updateStatus(profile, LikeStatus.ACCEPTED)
     }
 
     override fun onDeclineClicked(profile: Profile) {
-        viewModel.updateStatus(profile, 0)
+        viewModel.updateStatus(profile, LikeStatus.REJECTED)
     }
 }

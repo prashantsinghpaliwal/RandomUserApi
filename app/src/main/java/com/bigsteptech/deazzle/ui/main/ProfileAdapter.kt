@@ -1,13 +1,19 @@
 package com.bigsteptech.deazzle.ui.main
 
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bigsteptech.deazzle.R
+import com.bigsteptech.deazzle.common.clickWithAnimation
+import com.bigsteptech.deazzle.common.gone
+import com.bigsteptech.deazzle.common.visible
+import com.bigsteptech.deazzle.data.local.LikeStatus
 import com.bigsteptech.deazzle.data.local.Profile
 import com.bigsteptech.deazzle.databinding.ItemProfileBinding
+import java.util.*
 
 
 class ProfileAdapter(private val clickListener: ItemClickListener) :
@@ -35,12 +41,12 @@ class ProfileAdapter(private val clickListener: ItemClickListener) :
 
             when (profileList[position].likeStatus) {
 
-                -1 -> {
-                    likeStatus.visibility = View.GONE
+                LikeStatus.UNDEFINED -> {
+                    likeStatus.gone()
                 }
 
-                0 -> {
-                    likeStatus.visibility = View.VISIBLE
+                LikeStatus.REJECTED -> {
+                    likeStatus.visible()
                     likeStatus.setTextColor(
                         ContextCompat.getColor(
                             likeStatus.context,
@@ -51,7 +57,7 @@ class ProfileAdapter(private val clickListener: ItemClickListener) :
                 }
 
                 else -> {
-                    likeStatus.visibility = View.VISIBLE
+                    likeStatus.visible()
                     likeStatus.setTextColor(
                         ContextCompat.getColor(
                             likeStatus.context,
@@ -61,6 +67,15 @@ class ProfileAdapter(private val clickListener: ItemClickListener) :
                     likeStatus.text = "Accepted"
                 }
             }
+
+            acceptButton.setOnClickListener {
+                (it as ImageView).clickWithAnimation(clickListener, profileList[position], true)
+            }
+
+            rejectButton.setOnClickListener {
+                (it as ImageView).clickWithAnimation(clickListener, profileList[position], false)
+            }
+
         }
 
         holder.binding.executePendingBindings()

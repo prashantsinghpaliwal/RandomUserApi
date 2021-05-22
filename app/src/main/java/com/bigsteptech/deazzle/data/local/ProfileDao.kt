@@ -22,6 +22,6 @@ interface ProfileDao {
     suspend fun deleteAll()
 
     @Query("UPDATE profile SET likeStatus = :likeStatus WHERE id LIKE :id ")
-    suspend fun updateItem(id: Long, likeStatus: Int)
+    suspend fun updateItem(id: Long, likeStatus: LikeStatus)
 
 }

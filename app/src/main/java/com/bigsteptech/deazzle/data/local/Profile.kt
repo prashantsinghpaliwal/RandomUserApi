@@ -4,6 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
+enum class LikeStatus(val value: Int) {
+    REJECTED(0), ACCEPTED(1 ), UNDEFINED(-1)
+}
+
 @Entity(tableName = "profile")
 data class Profile(
 
@@ -27,7 +31,7 @@ data class Profile(
 
     var picture: String? = "",
 
-    var likeStatus : Int? = 0,
+    var likeStatus: LikeStatus = LikeStatus.UNDEFINED,
 
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
