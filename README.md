@@ -1,7 +1,5 @@
 # Random User App
 
-<img src="media/screenshot_1.png" width="200"> <img src="media/screenshot_2.png" width="200">
-
 **Random User App** uses **https://randomuser.me** api to fetch random users and show in a list with **"Accept"** & **"Reject"** buttons . Feel free to create PRs.
 
 ## About
